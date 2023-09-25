@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import React, { useEffect, useState} from 'react';
 import './App.css';
+import Header from './component/Header';
+import Footer from './component/Footer';
+import MemeGen from './component/MemeGen';
 
 function App() {
-  return (
+
+   const[meme, setMeme] = useState([])
+
+useEffect(() =>{
+      const HandleGetMemes = async () => {
+        const response = await fetch ("https://programming-memes-images.p.rapidapi.com/v1/memes",{
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': '6b82a7a6d2msh32ced45368a2b09p10660cjsnec1ffed73f49',
+            'X-RapidAPI-Host': 'programming-memes-images.p.rapidapi.com'
+     }})
+      const result = await response.json() 
+      console.log(result)
+        setMeme(result)
+        
+       
+   }     
+      HandleGetMemes()
+    }, [])
+
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <MemeGen meme={meme} />
+      <Footer />
     </div>
   );
 }
 
 export default App;
+ 
+ 

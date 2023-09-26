@@ -17,13 +17,15 @@ useEffect(() =>{
             'X-RapidAPI-Host': 'programming-memes-images.p.rapidapi.com'
      }})
       const result = await response.json() 
-      console.log(result)
-        setMeme(result)
+          console.log(result)
+          setMeme(result)
         
        
    }     
       HandleGetMemes()
     }, [])
+
+
 
     return (
     <div className="App">

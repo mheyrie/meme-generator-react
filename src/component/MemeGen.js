@@ -1,21 +1,11 @@
 import React from 'react'
 
-function MemeGen({meme, handleMemeClick}) {
+function MemeGen({meme}) {
+  console.log(meme)
   return (
     <div>
         <h3>Meme Generator</h3>
-        {meme.map((mem) =>{
-          return(
-            <li key={mem.id}>
-        <img  src={mem.image} alt="meme" />
-        </li>
-         )}
-        
-        )}
-            
-          
-    
-        
+        {meme === undefined ? null : <img src={meme.image} alt='no pic'/>}
     </div>
   )
 }

@@ -7,6 +7,7 @@ import MemeGen from './component/MemeGen';
 function App() {
 
    const[meme, setMeme] = useState([])
+   const [reload, setReload] = useState(false)
 
 useEffect(() =>{
       const HandleGetMemes = async () => {
@@ -17,20 +18,19 @@ useEffect(() =>{
             'X-RapidAPI-Host': 'programming-memes-images.p.rapidapi.com'
      }})
       const result = await response.json() 
-          console.log(result)
           setMeme(result)
-        
-       
    }     
       HandleGetMemes()
-    }, [])
+    },[reload])
 
-
+    function handleMemeClick (event) {
+      setReload(() => !reload)
+    }
 
     return (
     <div className="App">
-      <Header />
-      <MemeGen meme={meme} />
+      <Header handleMemeClick={handleMemeClick}/>
+      <MemeGen meme={meme[Math.floor(11*Math.random())]}/>
       <Footer />
     </div>
   );
